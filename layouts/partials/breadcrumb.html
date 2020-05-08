@@ -1,0 +1,23 @@
+{{ define "breadcrumb" }}
+{{ with .Parent }}
+{{ template "breadcrumb" . }}
+<li class="breadcrumb-item"><a href="{{ .URL }}">{{ if .IsHome }}<i class="fa fa-home"
+            aria-hidden="true"></i>Home{{ else }}{{.Title}}{{ end }}</a> ></li>
+{{ end }}
+{{ end }}
+{{ if not .IsHome }}
+<div class="mag-breadcrumb py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        {{ template "breadcrumb" . }}
+                        {{.Title}}
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}

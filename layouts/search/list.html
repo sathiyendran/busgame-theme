@@ -1,0 +1,36 @@
+{{ define "main" }}
+
+<section class="mag-posts-area d-flex flex-wrap">
+  {{partial "home_left_sidebar.html" . }}
+
+  <div class="mag-posts-content mt-30 mb-30 p-30 box-shadow">
+    <div class="sports-videos-area">
+      <!-- Section Title -->
+      <div class="section-heading">
+        <h5>{{.Title}}</h5>
+      </div>
+      <section class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 mx-auto">
+              <div id="search-results"></div>
+              <script id="search-result-template" type="text/x-js-template">
+          <ul class="search-result list-unstyled" id="summary-${key}">
+            <li class="border-bottom mb-4 pb-3">
+              <h4><a class="text-dark" href="${link}">${title}</a></h4>
+              <p>${snippet}</p>
+              ${ isset tags }<p>Tags: ${tags}</p>${ end }
+              ${ isset categories }<p>Categories: ${categories}</p>${ end }
+            </li>
+          </ul>
+        </script>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  {{partial "home_right_sidebar.html" . }}
+</section>
+<!-- /search result -->
+
+{{ end }}

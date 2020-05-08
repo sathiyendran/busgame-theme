@@ -1,0 +1,77 @@
+<!-- >>>>>>>>>>>>>>>>>>>>
+         Post Right Sidebar Area
+        <<<<<<<<<<<<<<<<<<<<< -->
+<div class="post-sidebar-area right-sidebar mt-30 mb-30 box-shadow">
+    <!-- Sidebar Widget -->
+    <div class="single-sidebar-widget p-30">
+        <!-- Social Followers Info -->
+        <div class="social-followers-info">
+            <script src="https://apis.google.com/js/platform.js"></script>
+
+            <div class="g-ytsubscribe" data-channelid="UCDnWKzj5Mt62kyHZuckrUEw" data-layout="full"
+                data-count="default"></div>
+
+            <a href="https://www.youtube.com/channel/UCDnWKzj5Mt62kyHZuckrUEw" class="youtube-subscribers"
+                target="_blank"><i class="fa fa-youtube"></i> <span>Subscribe</span></a>
+
+        </div>
+    </div>
+
+    <!-- Sidebar Widget -->
+    <div class="single-sidebar-widget p-30">
+        <!-- Section Title -->
+        <div class="section-heading">
+            <h5>Categories</h5>
+        </div>
+        {{- if isset .Site.Taxonomies "categories" }}
+        {{- if not (eq (len .Site.Taxonomies.categories) 0) }}
+        <ul class="catagory-widgets">
+            {{- range $name, $items := .Site.Taxonomies.categories }}
+
+            <li><a href="{{ "categories/" | relLangURL }}{{ $name | urlize | lower }}"><span><i
+                            class="fa fa-angle-double-right" aria-hidden="true"></i>
+                        {{ $name | title | humanize }}</span>
+                    <span>{{ $items.Count }}</span></a></li>
+            {{- end }}
+        </ul>
+        {{- end }}
+        {{- end }}
+    </div>
+
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8988165810598781" data-ad-slot="3815719528"
+        data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <div class="single-sidebar-widget p-30">
+        <!-- Section Title -->
+        <div class="section-heading">
+            <h5>Random Posts</h5>
+        </div>
+        {{ $randomPosts := shuffle (where .Site.Pages "Type" "post") | first 6 }}
+
+        {{ range $randomPosts  }}
+        <!-- Single Blog Post -->
+        <div class="single-blog-post d-flex">
+
+            <div class="post-content">
+
+                <a href="{{ .Permalink }}" class="post-title"> <img src="{{ .Params.Image | absURL }}"
+                        alt="">{{.Title}}</a>
+
+            </div>
+        </div>
+
+        {{ end }}
+
+    </div>
+
+
+    <!-- Resposive -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8988165810598781" data-ad-slot="3815719528"
+        data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>

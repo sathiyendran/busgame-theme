@@ -1,0 +1,119 @@
+{{ define "main" }}
+
+{{ partial "breadcrumb.html" . }}
+
+
+
+<section class="post-details-area">
+  <div class="container">
+    <div class="row justify-content-center">
+      <!-- Post Details Content Area -->
+      <div class="col-12 col-xl-8">
+        <div class="post-details-content bg-white mb-30 p-30 box-shadow">
+          <div class="blog-thumb mb-30">
+            <img src="img/bg-img/50.jpg" alt="">
+          </div>
+          <div class="blog-content">
+            <div class="post-meta">
+              <a href="#">{{ .PublishDate.Format "Jan 02, 2006" }}</a>
+              {{ range $name := .Params.categories }}
+              <a href="{{ "categories/" | relLangURL }}{{ $name | urlize | lower }}">
+                {{ $name }}
+              </a>
+              {{ end }}
+            </div>
+            <h4 class="post-title">{{ .Title }}</h4>
+            <!-- Post Meta -->
+            <div class="post-meta-2">
+              <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> 1034</a>
+              <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 834</a>
+              <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> 234</a>
+            </div>
+
+            {{.Content}}
+
+            <div class="tag-area">
+              <div class="tag-widget">
+
+                {{ $taxonomy := "tags" }}
+                {{ with .Param $taxonomy }}
+
+                {{ range $index, $tag := . }}
+                {{ with $.Site.GetPage (printf "/%s/%s" $taxonomy $tag) -}}
+
+                <a href="{{ .Permalink }}">#{{ $tag | humanize }}</a>
+
+                {{- end -}}
+                {{- end -}}
+
+                {{ end }}
+              </div>
+            </div>
+
+            <!-- Like Dislike Share -->
+            <div class="like-dislike-share my-5">
+
+              <!-- Go to www.addthis.com/dashboard to customize your tools -->
+              <div class="addthis_inline_share_toolbox"></div>
+
+            </div>
+
+
+          </div>
+        </div>
+
+        <!-- Related Post Area -->
+        <div class="related-post-area bg-white mb-30 px-30 pt-30 box-shadow">
+          <!-- Section Title -->
+          <div class="section-heading">
+            <h5>Related Post</h5>
+          </div>
+
+          <div class="row">
+
+            {{ $randomPosts := shuffle (where .Site.Pages "Type" "post") | first 3 }}
+
+            {{ range $randomPosts  }}
+
+
+            <!-- Single Blog Post -->
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="single-blog-post style-4 mb-30">
+                <div class="post-thumbnail">
+                  <img src="{{.Params.Image | absURL }}" alt="{{ .Title }}">
+                </div>
+                <div class="post-content">
+                  <a href="{{ .RelPermalink }}l" class="post-title">{{ .Title }}</a>
+
+                </div>
+              </div>
+            </div>
+            {{ end }}
+
+
+          </div>
+        </div>
+
+
+        <!-- Post A Comment Area -->
+        <div class="post-a-comment-area bg-white mb-30 p-30 box-shadow clearfix">
+          <!-- Section Title -->
+          <div class="section-heading">
+            <h5>LEAVE A REPLY</h5>
+          </div>
+
+          {{ template "_internal/disqus.html" . }}
+
+        </div>
+      </div>
+
+      {{partial "sidebar.html" . }}
+    </div>
+  </div>
+</section>
+<!-- ##### Post Details Area End ##### -->
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5eb2496a2a59d5e9"></script>
+
+
+{{ end }}

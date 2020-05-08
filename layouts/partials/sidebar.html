@@ -1,0 +1,43 @@
+<!-- Sidebar Widget -->
+<div class="col-12 col-md-6 col-lg-5 col-xl-4">
+  <div class="sidebar-area bg-white mb-30 box-shadow">
+
+    <div class="single-sidebar-widget p-30">
+      <!-- Social Followers Info -->
+      <div class="social-followers-info">
+        <script src="https://apis.google.com/js/platform.js"></script>
+
+        <div class="g-ytsubscribe" data-channelid="UCDnWKzj5Mt62kyHZuckrUEw" data-layout="full" data-count="default">
+        </div>
+
+        <a href="https://www.youtube.com/channel/UCDnWKzj5Mt62kyHZuckrUEw" class="youtube-subscribers"
+          target="_blank"><i class="fa fa-youtube"></i> <span>Subscribe</span></a>
+
+      </div>
+    </div>
+
+
+    <div class="single-sidebar-widget p-30">
+      <!-- Section Title -->
+      <div class="section-heading">
+        <h5>Random Posts</h5>
+      </div>
+      {{ $randomPosts := shuffle (where .Site.Pages "Type" "post") | first 6 }}
+
+      {{ range $randomPosts  }}
+      <!-- Single Blog Post -->
+      <div class="single-blog-post d-flex">
+
+        <div class="post-content">
+
+          <a href="{{ .Permalink }}" class="post-title"> <img src="{{ .Params.Image | absURL }}" alt="">{{.Title}}</a>
+
+        </div>
+      </div>
+
+      {{ end }}
+
+    </div>
+
+  </div>
+</div>
